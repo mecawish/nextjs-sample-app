@@ -27,8 +27,7 @@ const Nav = () => (
           Note App
         </a>
       </Link>
-
-      <Link href="/notes">
+      <Link href="/note">
         <a sx={{ color: "text", fontSize: 3, cursor: "pointer" }}>notes</a>
       </Link>
       <a
