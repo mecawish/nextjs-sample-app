@@ -3,11 +3,7 @@
 import { jsx } from "theme-ui";
 import Link from "next/link";
 
-const Notes = () => {
-  const notes = new Array(15)
-    .fill(1)
-    .map((e, i) => ({ id: i, title: `Note ${i}` }));
-
+const Notes = ({ notes }) => {
   return (
     <div sx={{ variant: "containers.page" }}>
       <h1>My Notes</h1>
@@ -21,7 +17,7 @@ const Notes = () => {
       >
         {notes.map((note) => (
           <div key={note.id} sx={{ width: "33%", p: 2 }}>
-            <Link href="/notes/[id]" as={`/notes/${note.id}`}>
+            <Link href="/note/[id]" as={`/note/${note.id}`}>
               <a sx={{ textDecoration: "none", cursor: "pointer" }}>
                 <div sx={{ variant: "containers.card" }}>
                   <strong>{note.title}</strong>
@@ -34,5 +30,13 @@ const Notes = () => {
     </div>
   );
 };
+
+export async function getServerSideProps() {
+  const res = await fetch(`http://localhost:3000/api/note/`);
+  const { data } = await res.json();
+  return {
+    props: { notes: data },
+  };
+}
 
 export default Notes;

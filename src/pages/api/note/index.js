@@ -6,7 +6,6 @@ const handler = nc()
     res.json({ data: notes });
   })
   .post((req, res) => {
-    console.log(req.body)
     const note = {
       ...req.body,
       id: Date.now(),
